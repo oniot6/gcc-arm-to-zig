@@ -40,7 +40,7 @@ pub const newlib = struct {
         const gcc_arm_sysroot_path = std.mem.trim(u8, b.run(&.{ arm_gcc_pgm, "-print-sysroot" }), "\r\n");
         const gcc_arm_multidir_relative_path = std.mem.trim(u8, b.run(&.{ arm_gcc_pgm, b.fmt("-mcpu={s}", .{gcc_target.cpu.name}), fpu_string, float_abi_string, "-print-multi-directory" }), "\r\n");
         const gcc_arm_version = std.mem.trim(u8, b.run(&.{ arm_gcc_pgm, "-dumpversion" }), "\r\n");
-        const gcc_arm_lib_path1 = b.fmt("{s}/../lib/gcc/arm-none-eabi/{s}/{s}", .{ gcc_arm_sysroot_path, gcc_arm_version, gcc_arm_multidir_relative_path });
+        const gcc_arm_lib_path1 = b.fmt("{s}/../lib/gcc/arm-none-eabi/newlib/{s}/{s}", .{ gcc_arm_sysroot_path, gcc_arm_version, gcc_arm_multidir_relative_path });
         const gcc_arm_lib_path2 = b.fmt("{s}/lib/{s}", .{ gcc_arm_sysroot_path, gcc_arm_multidir_relative_path });
 
         exe_or_lib.addLibraryPath(.{ .cwd_relative = gcc_arm_lib_path1 });
